@@ -1,11 +1,11 @@
 :root {
   --squish-animation-time: 500ms;
-  --progress-animation-time: 2000ms;
+  --progress-animation-time: 2500ms;
 }
 
-/* * {
+* {
   font-family: "Poppins", sans-serif;
-} */
+}
 
 body {
   background-color: #1d1f20;
@@ -32,6 +32,8 @@ body {
   color: transparent;
   user-select: none;
   cursor: default;
+  animation: hide 0ms
+    calc(var(--squish-annimation-time) + var(--progress-animation-time));
 }
 
 .btn::before {
@@ -41,7 +43,8 @@ body {
   background-color: #2b2d2f;
   inset: 0;
   border-radius: 0.125em;
-  animation: squish var(--squish-animation-time);
+  animation: squish var(--squish-animation-time)
+    cubic-bezier(0.24, 0.67, 0.66, 1.37);
   animation-fill-mode: forwards;
 }
 
@@ -50,8 +53,8 @@ body {
   display: none;
   position: absolute;
   background-color: #505357;
-  left: 50%;
-  right: 50%;
+  left: 51%;
+  right: 51%;
   top: 45%;
   bottom: 45%;
   border-radius: 0.25em;
@@ -63,6 +66,21 @@ body {
 .btn.animating::before,
 .btn.animating::after {
   display: block;
+}
+
+.checkmark-container {
+  background-color: #71dfbe;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkmark-svg {
+  stroke: #fff;
+  width: 35px;
 }
 
 /* ANIMATION */
@@ -84,5 +102,11 @@ body {
     top: 45%;
     bottom: 45%;
     border-radius: 0.25em;
+  }
+}
+
+@keyframes hide {
+  100% {
+    display: none;
   }
 }
